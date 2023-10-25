@@ -4,14 +4,14 @@ const conn = require("./app/database/conn")
 const session = require("express-session")
 const FileStore = require("session-file-store")(session)
 require('dotenv').config()
-
-//TODO: Models
+const models = require('./app/models/index')
 
 //TODO: Configurar express
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
 //TODO: Routes
+
 
 //TODO: Inicializar session
 app.use(
