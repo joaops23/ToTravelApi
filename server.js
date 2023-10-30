@@ -11,6 +11,7 @@ app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
 //TODO: Routes
+app.use("", require("./app/router/accountRoutes"))
 
 
 //TODO: Inicializar session
