@@ -1,8 +1,10 @@
-const { DataTypes } = require("sequelize")
-const db = require("../../database/conn");
+const { DataTypes, Model } = require("sequelize")
+const sequelize = require("../../database/conn");
 const Groups = require("./Groups");
 
-const User = db.define("User", {
+class User extends Model{}
+
+User.init({
     name: {
         type: DataTypes.STRING,
         require: true,
@@ -25,6 +27,9 @@ const User = db.define("User", {
         require: false,
         defaultValue: 1,
     }
+}, {
+    sequelize,
+    modelName: "User"
 });
 
 User.hasMany(Groups, {foreignKey: "user_admin"})

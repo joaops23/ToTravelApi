@@ -1,8 +1,10 @@
-const { DataTypes } = require("sequelize")
-const db = require("./../../database/conn")
+const { DataTypes, Model } = require("sequelize")
+const sequelize = require("./../../database/conn")
 const User = require("./User")
 
-const Vehicle = db.define("Vehicle", {
+class Vehicle extends Model{}
+
+Vehicle.init({
     driver_id: {
         type: DataTypes.INTEGER,
         include: {
@@ -24,6 +26,9 @@ const Vehicle = db.define("Vehicle", {
         require: false,
         defaultValue: 'pending',
     }
+}, {
+    sequelize,
+    modelName: 'Vehicle'
 })
 
 module.exports = Vehicle

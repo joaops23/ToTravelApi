@@ -1,9 +1,11 @@
-const { DataTypes } = require("sequelize")
-const db = require("./../../database/conn")
+const { DataTypes, Model } = require("sequelize")
+const sequelize = require("./../../database/conn")
 const Groups = require("./Groups")
 const User = require("./User")
 
-const MembersGroup = db.define("members_group", {
+class MembersGroup extends Model{}
+
+MembersGroup.init({
     user_id: {
         type: DataTypes.INTEGER,
         include: {
@@ -20,6 +22,9 @@ const MembersGroup = db.define("members_group", {
         },
         require: true,
     }
+}, {
+    sequelize,
+    modelName: 'MembersGroup'
 })
 
 module.exports = MembersGroup
