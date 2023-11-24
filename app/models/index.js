@@ -12,4 +12,7 @@ const models = {
     Vehicle
 }
 
+Groups.hasMany(MembersGroup, {foreignKey: "group_id"})
+MembersGroup.hasMany(User, {foreignKey: "id"})
+
 module.exports = models

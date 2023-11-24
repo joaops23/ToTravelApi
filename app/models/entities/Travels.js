@@ -1,9 +1,11 @@
-const { DataTypes } = require("sequelize")
-const db = require("./../../database/conn")
+const { DataTypes, Model } = require("sequelize")
+const sequelize = require("./../../database/conn")
 const User = require("./User")
 const Groups = require("./Groups")
 
-const Travels = db.define("Travels", {
+class Travels extends Model{}
+
+Travels.init({
     userRoot: {
         type: DataTypes.INTEGER,
         include: {
@@ -40,6 +42,9 @@ const Travels = db.define("Travels", {
         type: DataTypes.STRING,
         require: true,
     }
+}, {
+    sequelize,
+    modelName: 'Travels'
 })
 
 Travels.belongsTo(Groups, {foreignKey: "group_id"})

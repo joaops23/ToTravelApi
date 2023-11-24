@@ -1,17 +1,16 @@
-const express = require("express")
-const app = new express()
-const conn = require("./app/database/conn")
-const session = require("express-session")
-const FileStore = require("session-file-store")(session)
-require('dotenv').config()
-const models = require('./app/models/index')
+const express = require("express");
+const app = new express();
+const conn = require("./app/database/conn");
+const session = require("express-session");
+const FileStore = require("session-file-store")(session);
+require('dotenv').config();
+const models = require('./app/models/index');
+const jwt = require("jsonwebtoken");
+const handleSession  = require("./app/middlewares/handleSession");
 
 //TODO: Configurar express
-app.use(express.urlencoded({extended: true}))
-app.use(express.json())
-
-//TODO: Routes
-app.use("", require("./app/router/accountRoutes"))
+app.use(express.urlencoded({extended: true}));
+app.use(express.json());
 
 
 //TODO: Inicializar session
@@ -31,15 +30,15 @@ app.use(
             httpOnly: true //rodará sem certificado https
         }
     })
-)
+);
 
 // Caso exista, Retorna a session do uusário
-app.use((req, res, next) => {
-    if(req.session.userId) {
-        res.locals.session = req.session
-    }
-    next()
-})
+app.use(handleSession());
+
+//TODO: Routes
+app.use("", require("./app/router/accountRoutes"))
+app.use("travel/", require("./app/router/travelRoutes"))
+app.use("/group", require("./app/router/groupRoutes"))
 
 //TODO: Configurar req.user
 
@@ -49,3 +48,5 @@ conn.sync()
         app.listen(3000)
     })
     .catch((err) => console.error("[ERRO] - Erro ao subir aplicação, motivo: \n", err))
+
+//TODO: Implementar docker para gerenciar contâiners da aplicação
