@@ -20,7 +20,7 @@ module.exports = class AccountController{
         req.session.userId = user.id
         req.session.save(() => {
             //geração do token
-            const token = jwt.sign({id: user.id}, process.env.SECRET, {
+            const token = jwt.sign({id: user.id, type: user.type}, process.env.SECRET, {
                 expiresIn: process.env.SECRET_EXPIRATION
             })
             res.status(200).json({data: {id: user.id, name: user.name, token, auth: true,}})

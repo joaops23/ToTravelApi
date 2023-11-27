@@ -34,7 +34,11 @@ module.exports = class GroupsController{
 
     static async show(req, res){ }
 
-    static async create(req, res){ }
+    static async create(req, res){
+        //validar: [nome do grupo, usuário que está criando, lista de usuários(se existe)]
+        //abrir transação 
+        //ao finalizar, retornar status sucesso
+     }
 
     static async update(req, res){ }
 }

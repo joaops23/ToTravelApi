@@ -44,8 +44,8 @@ app.use("/group", require("./app/router/groupRoutes"))
 
 conn.sync()
     .then(() => {
-        console.log(`- Servidor iniciado na porta: 3000`)
-        app.listen(3000)
+        console.log(`- Servidor iniciado na porta: 3001`)
+        app.listen(3001)
     })
     .catch((err) => console.error("[ERRO] - Erro ao subir aplicação, motivo: \n", err))
 
